@@ -1,10 +1,19 @@
 import readline = require("readline-sync");
+import { Conta } from "./model/Conta";
+import { cores } from "./src/ultil/Cores";
 
 
-let opcao: number;
+export function main() {
+let opcao: number; 
+
+let c1: Conta = new Conta (1,123,1,"Igor Fernandes", 10)
+c1.sacar(5)
+c1.depositar(25)
+c1.visualizar();
+
 
 while (true) {
-
+console.log(cores.bg.black, cores.fg.gray)
 console.log("*****************************************************");
 console.log("                                                     ");
 console.log("                BANCO DO Igao                        ");
@@ -23,6 +32,7 @@ console.log("            9 - Sair                                 ");
 console.log("                                                     ");
 console.log("*****************************************************");
 console.log("                                                     ");
+console.log(cores.reset)
 
 console.log("Digite a opção desejada");
 
@@ -30,38 +40,76 @@ opcao = readline.questionInt ("");
 
 switch(opcao) {
     case 1:
-        console.log('Vamos criar sua conta')
+        aguardar()
+        console.log(cores.fg.whitestrong,
+            'Vamos criar sua conta', cores.reset)
         break;
     case 2:
-        console.log('Vamos listar suas contas')
+        aguardar()
+        console.log(cores.fg.whitestrong,
+            'Vamos listar suas contas', cores.reset)
         break;
     case 3:
-        console.log('Vamos buscar suas contas')
+        aguardar()
+        console.log(cores.fg.whitestrong,
+            'Vamos buscar suas contas', cores.reset)
         break;
     case 4:
-        console.log('Atualizar conta')
+        aguardar()
+        console.log(cores.fg.whitestrong,
+            'Atualizar conta', cores.reset)
         break;
     case 5:
-        console.log('Apagar')
+        aguardar()
+        console.log(cores.fg.whitestrong,
+            'Apagar', cores.reset)
         break;
     case 6:
-        console.log('Sacar')
+        aguardar()
+        console.log(cores.fg.whitestrong,
+            'Sacar', cores.reset)
         break;
     case 7:
-        console.log('Depositar')
+        aguardar()
+        console.log(cores.fg.whitestrong,
+            'Depositar', cores.reset)
         break;
     case 8:
-        console.log('Transformar')
+        aguardar()
+        console.log(cores.fg.whitestrong,
+            'Transformar', cores.reset)
         break;
-    case 9:
-        console.log("Saindo do programa...");
+    case 9:  
+        console.log(cores.fg.greenstrong,
+            "Saindo do programa...");
+            sobre()
         process.exit(0);
     default:
         console.log("Opção inválida! Por favor, escolha uma opção válida.");
         break;
+}    
+    console.log("Pressione Enter para continuar...");
+    readline.question("");
+
+}}
+
+export function sobre(): void {
+    console.log("\n*****************************************************");
+    console.log("Projeto Desenvolvido por: Igor Fernandes Quaresma ");
+    console.log("Generation Brasil");
+    console.log("https://github.com/IgorFernandesQuaresma");
+    console.log("*****************************************************");
 }
 
+export function aguardar(): void {
+    console.log(cores.fg.greenstrong)
+    console.log("\n*****************************************************");
+    console.log("Executando...");
+    console.log("*****************************************************");
+    console.log(cores.reset)
 }
+
+main()
     
 
 
