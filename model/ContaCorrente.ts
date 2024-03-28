@@ -1,6 +1,6 @@
 import { Conta } from "./Conta";
 
-export abstract class ContaCorrente extends Conta {
+export class ContaCorrente extends Conta {
     private _limite: number;
 
     constructor (numero: number, agencia: number, tipo: number, titular: string, saldo: number, limite: number) {
@@ -70,3 +70,10 @@ export abstract class ContaCorrente extends Conta {
     }
 }
 
+/* let contaCorrente = new ContaCorrente (12, 123, 1, "Igor Fernandes", 1000, 2000 );
+
+
+contaCorrente.visualizar()
+contaCorrente.sacar(2500)
+contaCorrente.depositar(1500)
+contaCorrente.visualizar() */

@@ -1,15 +1,18 @@
 import readline = require("readline-sync");
 import { Conta } from "./model/Conta";
 import { cores } from "./src/ultil/Cores";
+import { ContaController } from "./controller/ContaController";
+import { ContaCorrente } from "./model/ContaCorrente";
 
 
 export function main() {
 let opcao: number; 
 
-let c1: Conta = new Conta (1,123,1,"Igor Fernandes", 10)
-c1.sacar(5)
-c1.depositar(25)
-c1.visualizar();
+let conta: ContaController = new ContaController();
+let cc1: ContaCorrente = new ContaCorrente(1, 123, 2, "Igor Fernandes", 300, 1000);
+conta.cadastrar(cc1)
+
+
 
 
 while (true) {
@@ -48,11 +51,13 @@ switch(opcao) {
         aguardar()
         console.log(cores.fg.whitestrong,
             'Vamos listar suas contas', cores.reset)
+            conta.listarTodas()
         break;
     case 3:
         aguardar()
         console.log(cores.fg.whitestrong,
             'Vamos buscar suas contas', cores.reset)
+            
         break;
     case 4:
         aguardar()
