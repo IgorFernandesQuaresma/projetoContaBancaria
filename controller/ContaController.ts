@@ -59,19 +59,63 @@ export class ContaController implements ContaRepository {
 
         if (buscaConta != null) {
             this.listaContas.splice(this.listaContas.indexOf(buscaConta), 1);
-            console.log(`Conta numero: ${numero} foi apagada com sucesso`)
+            console.log(`Conta numero: ${numero} do titular foi apagada com sucesso`)
             
         } else {
             console.log(`Conta não identificada`)
         }
     }
 
-    sacar(numero: number, valor: number): void {}
+    sacar(numero: number, valor: number): void {
+        let buscaConta = this.buscarNoArray(numero)
 
-    depositar(numero: number, valor: number): void {}
+        
+        if (buscaConta != null) {
+           if (buscaConta.sacar(valor) == true) {
 
-    transferir(numeroOrigem: number, numeroDestino: number, valor: number): void {} 
+            console.log(`O saque na conta ${numero} foi efetuado com sucesso`)
+            
+           }
+            
+        } else { 
+            console.log(`Conta não identificada`)
+        }
+    }
+
+    depositar(numero: number, valor: number): void {
+        let buscaConta = this.buscarNoArray(numero)
+
+        
+        if (buscaConta != null) {
+           buscaConta.depositar(valor)
+
+            console.log(`O deposito na conta ${numero} foi efetuado com sucesso`) 
+            
+        } else { 
+            console.log(`Conta não identificada`)
+        }
+    }
+
+    transferir(numeroOrigem: number, valor: number, numeroDestino: number): void {
+        let buscaContaOrigem = this.buscarNoArray(numeroOrigem)
+        let buscaContaDestino = this.buscarNoArray(numeroDestino)
+
+        
+        if (buscaContaOrigem != null && buscaContaDestino != null) {
+            if (buscaContaOrigem.sacar(valor) == true) {
+                buscaContaDestino.depositar(valor)
+
+            console.log(`O valor ${valor} foi enviado da conta ${numeroOrigem} para a conta ${numeroDestino}`) 
+        }
+
+        } if (buscaContaOrigem == null) {
+
+            console.log(`Conta de origem não identificada`)         
+        } else {
+
+            console.log(`Conta de destino não identificada`)  
+
+        }
+            
+    } 
 }
-
-
-

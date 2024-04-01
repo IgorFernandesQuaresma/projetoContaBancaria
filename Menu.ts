@@ -7,13 +7,13 @@ import { ContaPoupanca } from "./model/ContaPoupanca";
 
 
 export function main() {
-let opcao, numero, agencia, saldo, tipo, limite, aniversarioConta: number; 
+let opcao, numero, agencia, saldo, tipo, limite, aniversarioConta, valor,  numeroDestino: number; 
 let titular: string
 const tiposContas = ['Conta Corrente', 'Conta Poupança']
 let conta: ContaController = new ContaController();
-let cc1: ContaCorrente = new ContaCorrente(1, 123, 1, "Igor Fernandes", 300, 12121995);
-let cc2: ContaCorrente = new ContaCorrente(12, 1234, 1, "Testando123" , 30000, 130000);
-let cp3: ContaPoupanca = new ContaPoupanca(54, 433, 2, "Testando 54", 10000, 16121995)
+let cc1: ContaCorrente = new ContaCorrente(conta.gerarNumero(), 123, 1, "Igor Fernandes", 300, 12121995);
+let cc2: ContaCorrente = new ContaCorrente(conta.gerarNumero(), 1234, 1, "Testando123" , 30000, 130000);
+let cp3: ContaPoupanca = new ContaPoupanca(conta.gerarNumero(), 433, 2, "Testando 54", 10000, 16121995)
 conta.cadastrar(cc1)
 conta.cadastrar(cc2) 
 conta.cadastrar(cp3)
@@ -47,7 +47,6 @@ opcao = readline.questionInt ("");
 
 switch(opcao) {
     case 1:
-        aguardar()
         console.log(cores.fg.whitestrong,
             'Vamos criar sua conta', cores.reset)
 
@@ -81,30 +80,30 @@ switch(opcao) {
             break;
         } 
 
-
+        aguardar()
         break;
 
     case 2:
-        aguardar()
         console.log(cores.fg.whitestrong,
             'Vamos listar suas contas', cores.reset)
             conta.listarTodas()
+            aguardar()
         break;
 
     case 3:
-        aguardar()
+        
         console.log(cores.fg.whitestrong,
 
             'Vamos buscar suas contas', cores.reset)
             let busca = readline.questionInt("Digite o numero da conta: ")
             conta.procurarPorNumero(busca)
-            
+            aguardar()   
         break;
 
     case 4:
-        aguardar();
+        
         console.log(cores.fg.whitestrong, 'Atualizar conta', cores.reset);
-        let numero = readline.questionInt("Digite o numero da conta: ");
+        numero = readline.questionInt("Digite o numero da conta: ");
         
         let buscaConta = conta.buscarNoArray(numero);
     
@@ -129,34 +128,53 @@ switch(opcao) {
             console.log(`A conta ${numero} não foi encontrada`);
         }
     
-            /* conta.buscarNoArray(busca4)
-            conta.procurarPorNumero(busca4) // não consegui implementar
-            let novaAgencia = readline.questionInt("Digite o numero da nova agencia: ") */
-            
+        aguardar()     
         break;
 
     case 5:
-        aguardar()
+        
         let contaDeletada = readline.questionInt("Digite o numero da conta deletada: ")
         conta.deletar(contaDeletada)
+
+        aguardar()
         break;
 
     case 6:
-        aguardar()
         console.log(cores.fg.whitestrong,
             'Sacar', cores.reset)
+
+        numero = readline.questionInt("Digite o numero da conta: ")
+        valor = readline.questionFloat("Digite o valor a ser sacado: ")
+        conta.sacar(numero, valor)
+
+            aguardar()
         break;
 
     case 7:
-        aguardar()
+        
         console.log(cores.fg.whitestrong,
             'Depositar', cores.reset)
+
+            numero = readline.questionInt("Digite o numero da conta: ")
+            valor = readline.questionFloat("Digite o valor a ser depositado: ")
+            conta.depositar(numero, valor)
+
+            aguardar()
         break;
 
     case 8:
-        aguardar()
+        
         console.log(cores.fg.whitestrong,
-            'Transformar', cores.reset)
+            'Transferir', cores.reset)
+
+            numero = readline.questionInt("Digite o numero da sua conta: ")
+            valor = readline.questionFloat("Digite o valor a ser transferido: ")
+            numeroDestino = readline.questionInt("Digite o numero da conta que ira receber: ")
+           
+            conta.transferir(numero, valor, numeroDestino)
+
+            
+            aguardar()
         break;
 
     case 9:  
