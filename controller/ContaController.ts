@@ -6,9 +6,31 @@ export class ContaController implements ContaRepository {
     private listaContas: Array<Conta> = new Array<Conta>();
     public numero:number = 0;
 
-    procurarPorNumero(numero: number): void {
-        throw new Error("Method not implemented.");
+    public buscarNoArray(numero: number): Conta | null {  //metodo auxiliar buscarNumero
+        for (let conta of this.listaContas) {
+            if(conta.numero === numero)
+
+            return conta
+        }
+
+        return null
     }
+
+    public gerarNumero(): number { //metodo auxiliar Gerar numero
+        return ++ this.numero
+    }
+
+    procurarPorNumero(numero: number): void {
+        let conta = this.listaContas.find(conta => conta.numero === numero);
+        if (conta) {
+            console.log(`A conta escolhida é ${numero} do cliente ${conta.titular}`); 
+   
+        } else {
+            console.log(`Nenhuma conta encontrada com o número ${numero}`);
+        }
+    }
+
+
     listarTodas(): void {
         for (let conta of this.listaContas) {
             conta.visualizar()
@@ -20,20 +42,36 @@ export class ContaController implements ContaRepository {
         console.log('Conta cadastrada com sucesso')
     }   
     atualizar(conta: Conta): void {
-        throw new Error("Method not implemented.");
+        let buscaConta = this.buscarNoArray(conta.numero);
+
+        if (buscaConta != null) {
+
+            this.listaContas[this.listaContas.indexOf(buscaConta)] = conta;
+
+            console.log(`A conta ${conta.numero} foi atualizada com sucesso`)           
+        } else {
+            console.log(`A conta ${conta.numero} não foi encontrada`)
+        }
     }
+
     deletar(numero: number): void {
-        throw new Error("Method not implemented.");
+        let buscaConta = this.buscarNoArray(numero);
+
+        if (buscaConta != null) {
+            this.listaContas.splice(this.listaContas.indexOf(buscaConta), 1);
+            console.log(`Conta numero: ${numero} foi apagada com sucesso`)
+            
+        } else {
+            console.log(`Conta não identificada`)
+        }
     }
-    sacar(numero: number, valor: number): void {
-        throw new Error("Method not implemented.");
-    }
-    depositar(numero: number, valor: number): void {
-        throw new Error("Method not implemented.");
-    }
-    transferir(numeroOrigem: number, numeroDestino: number, valor: number): void {
-        throw new Error("Method not implemented.");
-    }
-    
+
+    sacar(numero: number, valor: number): void {}
+
+    depositar(numero: number, valor: number): void {}
+
+    transferir(numeroOrigem: number, numeroDestino: number, valor: number): void {} 
 }
+
+
 

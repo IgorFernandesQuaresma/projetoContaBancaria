@@ -4,7 +4,7 @@ import { Conta } from "./Conta";
 export class ContaPoupanca extends Conta {
     private _aniversarioConta: number;  
 
-    constructor (aniversarioConta: number, numero: number, agencia: number, tipo: number, titular: string, saldo: number) {
+    constructor (numero: number, agencia: number, tipo: number, titular: string, saldo: number, aniversarioConta: number) {
         super (numero, agencia, tipo, titular, saldo)
         this._aniversarioConta = aniversarioConta
 
@@ -25,7 +25,7 @@ export class ContaPoupanca extends Conta {
     }
 }
 
-let contaPoupanca: ContaPoupanca = new ContaPoupanca (12121995, 123, 1, 2, "Teste", 1000) 
+/* let contaPoupanca: ContaPoupanca = new ContaPoupanca (12121995, 123, 1, 2, "Teste", 1000) 
 
 contaPoupanca.depositar(1450)
-contaPoupanca.visualizar()
+contaPoupanca.visualizar() */
